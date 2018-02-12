@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour {
     //voor springen
     private int JumpCount;
     public int MaxJumpCount = 2;
-    public float JumpSpeed = 20f;
-    public float GravMulti = 10F;
+    public float JumpSpeed = 7f;
+    public float GravMulti = 1.1F;
     private float VerticalVelocity;
 
     //voor zoomen camera
@@ -138,12 +138,14 @@ public class PlayerController : MonoBehaviour {
         Player.Move(Movement * Time.deltaTime);
         CenterPoint.position = new Vector3(Character.position.x, Character.position.y + CamYPosition, Character.position.z);
 
+        Character.rotation = Quaternion.Euler(0, CenterPoint.eulerAngles.y, 0);
+
         //zorgt dat de character roteerd
-        if (Input.GetAxis("Vertical") > 0 | Input.GetAxis("Vertical") < 0)
-        {
-            Quaternion TurnAngle = Quaternion.Euler(0, CenterPoint.eulerAngles.y, 0);
-            Character.rotation = Quaternion.Slerp(Character.rotation, TurnAngle, Time.deltaTime * RotationSpeed);
-        }
+        //if (Input.GetAxis("Vertical") > 0 | Input.GetAxis("Vertical") < 0)
+        //{
+        //    Quaternion TurnAngle = Quaternion.Euler(0, CenterPoint.eulerAngles.y, 0);
+        //    Character.rotation = Quaternion.Slerp(Character.rotation, TurnAngle, Time.deltaTime * RotationSpeed);
+        //}
 
         
 
@@ -160,7 +162,7 @@ public class PlayerController : MonoBehaviour {
             VerticalVelocity += Physics.gravity.y * Time.deltaTime;
 
             //als speler valt, krijgt hij extra snelheid.
-            if (CurVel < -1.2 && CurVel > -2)
+            if (CurVel < 0)
             {
                 VerticalVelocity = VerticalVelocity * GravMulti;
             }
@@ -172,24 +174,23 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        //moeilijk doen voor een blink met timer
-        
+        //Debug.text = "bump";
 
-        
+
+
     }
 
-    
+    private void OnTriggerEnter(Collider Speler)
+    {
+        //to see if the character is on "ground", so it can reset the double jump.
+        if (Speler.CompareTag("Block"))
+        {
+            Debug.text = "bump";
+        }
+    }
 
-   
+
 }
 
 
-//private void OnTriggerEnter(Collider other)
-//{
-//    //to see if the character is on "ground", so it can reset the double jump.
-//    if (other.CompareTag("Block"))
-//    {
-//        VerticalVelocity += Physics.gravity.y * Time.deltaTime;
-//        Debug.text = "bump";
-//    }
-//}
+

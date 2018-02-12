@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class BUPlayerController : MonoBehaviour {
 
     //debugging text
     public Text Debug;
