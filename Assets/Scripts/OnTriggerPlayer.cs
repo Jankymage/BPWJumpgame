@@ -5,11 +5,11 @@ using UnityEngine;
 public class OnTriggerPlayer : MonoBehaviour {
 
     private int CollectLeft = 5;
-    public Text ColText;
+    //public Text ColText;
 
     // Use this for initialization
     void Start () {
-        ColText = "";
+        //ColText = "";
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class OnTriggerPlayer : MonoBehaviour {
             CollectLeft -= 1;
             if (CollectLeft <= 0)
             {
-                ColText = "You Win!";
+                //ColText = "You Win!";
             }
         }
             
