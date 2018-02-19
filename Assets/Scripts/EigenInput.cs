@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EigenInput : MonoBehaviour
 {
-
+    [Range(0.01f,0.05f)]
     public float moveMulti = 1;
     public float jumpMulti = 6;
     public int jumpMax = 2;
@@ -17,7 +17,8 @@ public class EigenInput : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 movement;
-    private float moveSpeed = 0;
+    private float moveSpeedForward = 0;
+    private float moveSpeedSide = 0;
     private float jumpSpeed = 0;
     private Collider coll;
     private int jumpTimes = 0;
@@ -63,19 +64,40 @@ public class EigenInput : MonoBehaviour
         playerCam.LookAt(viewPoint);
         //draait de camera afhankelijk van de muis stand
         viewPoint.localRotation = (Quaternion.Euler(mouseY, mouseX, 0));
-
+        //zet de positie van de viewpoint afhankelijk van de positie van de character
         viewPoint.position = new Vector3(character.position.x, character.position.y + camYOffset, character.position.z);
 
+
+        //reset de int voor het aantal sprongen, als de character op de grond is.
         if (Grounded()){
             jumpTimes = 0;
         }
-
+        //zorgt dat de character vooruit loopt.
         if (Input.GetKey(KeyCode.W)){
-            moveSpeed = moveMulti;
-        } else{
-            moveSpeed = 0;
+            moveSpeedForward += moveMulti;
+        } else if(Input.GetKey(KeyCode.S))
+        {
+            moveSpeedForward -= moveMulti;
+        } else
+        {
+            moveSpeedForward = 0;
         }
 
+        //zorgt dat de character vooruit loopt.
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveSpeedSide += moveMulti;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            moveSpeedSide -= moveMulti;
+        }
+        else
+        {
+            moveSpeedSide = 0;
+        }
+
+        //springt als op spatie gedrukt is en er nog spring "charges" over zijn.
         if (Input.GetButtonDown("Jump") && jumpTimes <= (jumpMax - 1)){
             jumpSpeed = jumpMulti;
             jumpTimes += 1;
@@ -90,13 +112,12 @@ public class EigenInput : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
 
+        //movement = (character.forward * moveSpeedForward) + (character.right * moveSpeedSide);
 
-        movement = new Vector3(rb.position.x, rb.position.y, rb.position.z + moveSpeed);
-        movement = rb.rotation * movement;
+        movement = character.forward * moveSpeedForward;
 
-        rb.MovePosition(movement);
+        rb.MovePosition(movement + rb.position);
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpSpeed, rb.velocity.z);
         
     }

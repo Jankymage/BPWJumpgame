@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OnTriggerPlayer : MonoBehaviour {
 
-    private int CollectLeft = 5;
-    //public Text ColText;
+    public int CollectLeft = 5;
+    public Text ColText;
 
     // Use this for initialization
     void Start () {
-        //ColText = "";
+        ColText.text = "";
 	}
 	
 	// Update is called once per frame
@@ -24,7 +25,7 @@ public class OnTriggerPlayer : MonoBehaviour {
             CollectLeft -= 1;
             if (CollectLeft <= 0)
             {
-                //ColText = "You Win!";
+                ColText.text = "You Win!";
             }
         }
             
