@@ -5,20 +5,25 @@ using UnityEngine;
 public class EigenInput : MonoBehaviour
 {
     [Range(0.01f,0.05f)]
-    public float moveMulti = 1;
+    public float moveMulti;
     public float jumpMulti = 6;
     public int jumpMax = 2;
     public Transform playerCam, character, viewPoint;
     public float mouseSpeed = 10f;
+    public int dashMax = 1;
+    [Range(1f, 5f)]
+    public float dashDistance;
+    
     private float Zoom = 2;
     private float ZoomSpeed = 2;
     private float ZoomMin = 2f;
     private float ZoomMax = -10f;
 
     private Rigidbody rb;
-    private Vector3 movement;
+    private Vector3 movementForward;
     private float moveSpeedForward = 0;
     private float moveSpeedSide = 0;
+    private Vector3 movementSide;
     private float jumpSpeed = 0;
     private Collider coll;
     private int jumpTimes = 0;
@@ -30,6 +35,11 @@ public class EigenInput : MonoBehaviour
     private float zoomMin = -2f;
     private float zoomMax = -10f;
     private float camYOffset = 1;
+
+    private int dashTimes = 0;
+    private bool dashPossible;
+    private float dashMulti;
+    
 
 
 
@@ -71,7 +81,14 @@ public class EigenInput : MonoBehaviour
         //reset de int voor het aantal sprongen, als de character op de grond is.
         if (Grounded()){
             jumpTimes = 0;
+            dashPossible = false;
+            dashTimes = 0;
         }
+        else
+        {
+            dashPossible = true;
+        }
+
         //zorgt dat de character vooruit loopt.
         if (Input.GetKey(KeyCode.W)){
             moveSpeedForward += moveMulti;
@@ -86,11 +103,11 @@ public class EigenInput : MonoBehaviour
         //zorgt dat de character vooruit loopt.
         if (Input.GetKey(KeyCode.A))
         {
-            moveSpeedSide += moveMulti;
+            moveSpeedSide -= moveMulti;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveSpeedSide -= moveMulti;
+            moveSpeedSide += moveMulti;
         }
         else
         {
@@ -105,6 +122,15 @@ public class EigenInput : MonoBehaviour
             jumpSpeed = 0;
         }
 
+        if (Input.GetButtonDown("Fire3") && dashPossible && dashTimes <= (dashMax - 1))
+        {
+            dashDistance += dashMulti;
+        }
+        else
+        {
+            dashDistance = 0;
+        }
+
         character.rotation = Quaternion.Euler(0, viewPoint.eulerAngles.y, 0);
 
     }
@@ -113,11 +139,14 @@ public class EigenInput : MonoBehaviour
     void FixedUpdate()
     {
 
-        //movement = (character.forward * moveSpeedForward) + (character.right * moveSpeedSide);
+        //movementForward = (character.forward * moveSpeedForward) + (character.right * moveSpeedSide);
 
-        movement = character.forward * moveSpeedForward;
+        movementForward = character.forward * moveSpeedForward * dashDistance;
+        movementSide = character.right * moveSpeedSide;
+        movementForward += movementSide;
 
-        rb.MovePosition(movement + rb.position);
+        rb.MovePosition(movementForward + rb.position);
+        rb.MovePosition(movementSide + rb.position);
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpSpeed, rb.velocity.z);
         
     }

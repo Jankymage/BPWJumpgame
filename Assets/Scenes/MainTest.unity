@@ -476,6 +476,8 @@ MonoBehaviour:
   character: {fileID: 449917031}
   viewPoint: {fileID: 423833935}
   mouseSpeed: 10
+  dashMax: 1
+  dashDistance: 0
 --- !u!23 &449917028
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -586,24 +588,6 @@ MonoBehaviour:
   dashDistance: 3
   dashSpeed: 5
   playerCam: {fileID: 1825127258}
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: -0.069114685
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0.9308853
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1 &533196479
 GameObject:
   m_ObjectHideFlags: 0
