@@ -469,15 +469,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996af3f6d5dd7db469bd46ebff66b650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveMulti: 0.0349
-  jumpMulti: 2
+  jumpText: {fileID: 443509713}
+  dashText: {fileID: 1610371699}
+  moveMulti: 0.336
+  jumpSpeed: 6
   jumpMax: 2
   playerCam: {fileID: 1825127258}
   character: {fileID: 449917031}
   viewPoint: {fileID: 423833935}
   mouseSpeed: 10
   dashMax: 1
-  dashDistance: 0
+  dashDistance: 5
 --- !u!23 &449917028
 MeshRenderer:
   m_ObjectHideFlags: 0
