@@ -15,9 +15,9 @@ public class EigenInput : MonoBehaviour
     public Transform playerCam, character, viewPoint;
     public float mouseSpeed = 10f;
     public int dashMax = 1;
-    [Range(1f, 5f)]
+    [Range(5f, 20f)]
     public float dashDistance;
-    [Range(0f, 5f)]
+    [Range(0f, 20f)]
     public float gravMulti;
     
     private float Zoom = 2;
@@ -44,15 +44,14 @@ public class EigenInput : MonoBehaviour
     private int dashTimes = 0;
     private bool dashPossible;
     private bool dashBool;
-    
-
 
     //TODO
-    //Fix max dash
-    //increase falling gravity
-
-
-
+    //separate scripts...
+    //add fancy particles
+    //make level
+    //make models
+    //animate models
+    
 
     void Start()
     {
@@ -95,9 +94,10 @@ public class EigenInput : MonoBehaviour
             jumpTimes += 1;
         }
         
-        if (Input.GetButtonDown("Fire3") && dashPossible)
+        if (Input.GetButtonDown("Fire3") && dashPossible && dashTimes <= dashMax -1)
         {
             dashBool = true;
+            dashTimes += 1;
         }
 
     }
@@ -150,13 +150,16 @@ public class EigenInput : MonoBehaviour
             moveSpeedSide = 0;
         }
 
+        Vector3 dir = playerCam.forward;
         
-        if (rb.velocity.y < 0)
+        if (dashBool)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (gravMulti - 1) * Time.deltaTime;
+            rb.MovePosition((character.forward * dashDistance) + rb.position);
+            
+            dashBool = false;
         }
 
-        
+        Debug.Log(character.forward);
 
         character.rotation = Quaternion.Euler(0, viewPoint.eulerAngles.y, 0);
 
@@ -166,19 +169,18 @@ public class EigenInput : MonoBehaviour
 
         if (jumpBool)
         {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            rb.velocity = Vector3.up * jumpSpeed;
+            //rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
             jumpBool = false;
         }
 
-        Vector3 dir = playerCam.forward;
-
-        if (dashBool)
+        if (rb.velocity.y < 0)
         {
-            rb.MovePosition(transform.position + dir.normalized * dashDistance);
-            dashBool = false;
+            rb.velocity += Vector3.up * Physics.gravity.y * (gravMulti - 1) * Time.deltaTime;
         }
 
-        
+
+
     }
 
     //Method that will look below character and see if there is a collider
