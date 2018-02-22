@@ -480,6 +480,7 @@ MonoBehaviour:
   mouseSpeed: 10
   dashMax: 1
   dashDistance: 5
+  gravMulti: 2.16
 --- !u!23 &449917028
 MeshRenderer:
   m_ObjectHideFlags: 0

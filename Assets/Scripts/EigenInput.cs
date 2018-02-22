@@ -17,6 +17,8 @@ public class EigenInput : MonoBehaviour
     public int dashMax = 1;
     [Range(1f, 5f)]
     public float dashDistance;
+    [Range(0f, 5f)]
+    public float gravMulti;
     
     private float Zoom = 2;
     private float ZoomSpeed = 2;
@@ -95,7 +97,6 @@ public class EigenInput : MonoBehaviour
         
         if (Input.GetButtonDown("Fire3") && dashPossible)
         {
-            Debug.Log("test");
             dashBool = true;
         }
 
@@ -150,6 +151,10 @@ public class EigenInput : MonoBehaviour
         }
 
         
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (gravMulti - 1) * Time.deltaTime;
+        }
 
         
 
