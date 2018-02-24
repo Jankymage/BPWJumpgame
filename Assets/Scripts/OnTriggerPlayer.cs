@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OnTriggerPlayer : MonoBehaviour {
 
-    public int CollectLeft = 5;
+    public int CollectLeft = 6;
     public Text ColText;
 
     // Use this for initialization

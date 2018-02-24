@@ -474,7 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpText: {fileID: 443509713}
   dashText: {fileID: 1610371699}
-  moveMulti: 0.348
+  moveMulti: 0.28
   jumpSpeed: 7
   jumpMax: 2
   playerCam: {fileID: 1825127258}
@@ -482,7 +482,7 @@ MonoBehaviour:
   viewPoint: {fileID: 423833935}
   mouseSpeed: 10
   dashMax: 1
-  dashDistance: 5
+  dashDistance: 5.98
   gravMulti: 20
 --- !u!23 &449917028
 MeshRenderer:

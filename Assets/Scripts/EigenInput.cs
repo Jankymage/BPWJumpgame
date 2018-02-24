@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class EigenInput : MonoBehaviour
 {
-    public Text jumpText;
-    public Text dashText;
+    //public Text jumpText;
+    //public Text dashText;
 
     [Range(0.1f,0.5f)]
     public float moveMulti;
@@ -106,7 +106,7 @@ public class EigenInput : MonoBehaviour
     void FixedUpdate()
     {
 
-        jumpText.text = "Jumps = " + jumpTimes.ToString();
+        //jumpText.text = "Jumps = " + jumpTimes.ToString();
 
 
 
@@ -158,8 +158,6 @@ public class EigenInput : MonoBehaviour
             
             dashBool = false;
         }
-
-        Debug.Log(character.forward);
 
         character.rotation = Quaternion.Euler(0, viewPoint.eulerAngles.y, 0);
 
