@@ -28,7 +28,7 @@ public class EigenInput : MonoBehaviour
     private Rigidbody rb;
     private float moveSpeedForward = 0;
     private float moveSpeedSide = 0;
-    private Collider coll;
+    private CapsuleCollider coll;
     private int jumpTimes = 0;
     private Vector3 movement;
     private bool jumpBool;
@@ -56,7 +56,7 @@ public class EigenInput : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
+        coll = GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -64,16 +64,18 @@ public class EigenInput : MonoBehaviour
 
         //Voor het zoomen van de muis (met clamp)
         zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        if (zoom > zoomMin)
-            zoom = zoomMin;
-        if (zoom < zoomMax)
-            zoom = zoomMax;
+        zoom = Mathf.Clamp(zoom, zoomMax, zoomMin);
+
+        //if (zoom > zoomMin)
+        //    zoom = zoomMin;
+        //if (zoom < zoomMax)
+        //    zoom = zoomMax;
         playerCam.transform.localPosition = new Vector3(0, 0, zoom);
 
         if (Input.GetMouseButton(1))
         {
-            mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
-            mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed;
+            mouseX += Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
+            mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
             Cursor.visible = false;
         }
         else { Cursor.visible = true; }
@@ -163,7 +165,14 @@ public class EigenInput : MonoBehaviour
 
         movement = (character.forward * moveSpeedForward) + (character.right * moveSpeedSide);
 
-        rb.MovePosition(movement + rb.position);
+
+        //checked waar heen beweegt of hij mag bewegen.
+        //Vector3 buttom = coll.center - Vector3.down * 0.9f;
+        //Vector3 top = coll.center - Vector3.up;
+        //if (Physics.CapsuleCast(buttom, top, 0.5f, movement.normalized, movement.magnitude) == false)
+        //{
+            rb.MovePosition(movement + rb.position);
+        //}
 
         if (jumpBool)
         {
@@ -186,4 +195,11 @@ public class EigenInput : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.1f);
     }
+
+    ////lelijke gele circel in editor
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawSphere(transform.position + movement.normalized, 0.5f);
+    //}
 }
