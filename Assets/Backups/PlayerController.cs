@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+
+
     //debugging text
     public Text Debug;
 

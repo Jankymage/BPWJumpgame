@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class EigenInput : MonoBehaviour
 {
-    //public Text jumpText;
-    //public Text dashText;
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
+    //NOG  VOORZIEN VAN COMMENTS!!!!
 
     [Range(0.1f,0.5f)]
     public float moveMulti;
@@ -19,7 +21,7 @@ public class EigenInput : MonoBehaviour
     public float dashDistance;
     [Range(0f, 20f)]
     public float gravMulti;
-    
+
     private float Zoom = 2;
     private float ZoomSpeed = 2;
     private float ZoomMin = 2f;
@@ -31,7 +33,8 @@ public class EigenInput : MonoBehaviour
     private CapsuleCollider coll;
     private int jumpTimes = 0;
     private Vector3 movement;
-    private bool jumpBool;
+    private bool jumpBool; //public zetten om met een ander script er bij te kunnen.
+    public GameObject jumpParticles;
 
     private float mouseY;
     private float mouseX;
@@ -47,11 +50,7 @@ public class EigenInput : MonoBehaviour
 
     //TODO
     //separate scripts...
-    //add fancy particles
-    //make level
-    //make models
-    //animate models
-    
+   
 
     void Start()
     {
@@ -94,6 +93,7 @@ public class EigenInput : MonoBehaviour
         {
             jumpBool = true;
             jumpTimes += 1;
+            Instantiate(jumpParticles, character);
         }
         
         if (Input.GetButtonDown("Fire3") && dashPossible && dashTimes <= dashMax -1)

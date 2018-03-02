@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrystalRotate : MonoBehaviour {
 
-    
+    //plaats dit script op een object om het rond te laten draaien.
 
     void Update()
     {
