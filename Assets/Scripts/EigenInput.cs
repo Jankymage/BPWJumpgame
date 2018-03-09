@@ -32,8 +32,8 @@ public class EigenInput : MonoBehaviour
     private float moveSpeedSide = 0;
     private CapsuleCollider coll;
     private int jumpTimes = 0;
-    private Vector3 movement;
-    private bool jumpBool; //public zetten om met een ander script er bij te kunnen.
+    public Vector3 movement; //public zetten om met een ander script er bij te kunnen.
+    private bool jumpBool; 
     public GameObject jumpParticles;
 
     private float mouseY;
@@ -50,6 +50,11 @@ public class EigenInput : MonoBehaviour
 
     //TODO
     //separate scripts...
+    //comments
+    //platforms vervangen
+    //zorgen dat character niet tegen platforms blijft plakken.
+    //side moving platforms?
+
    
 
     void Start()
