@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class EigenInput : MonoBehaviour
 {
-    //NOG  VOORZIEN VAN COMMENTS!!!!
-    //NOG  VOORZIEN VAN COMMENTS!!!!
-    //NOG  VOORZIEN VAN COMMENTS!!!!
-    //NOG  VOORZIEN VAN COMMENTS!!!!
 
+    //Alle public variables
     [Range(0.1f,0.5f)]
     public float moveMulti;
     public float jumpSpeed = 6;
@@ -21,7 +18,10 @@ public class EigenInput : MonoBehaviour
     public float dashDistance;
     [Range(0f, 20f)]
     public float gravMulti;
+    public GameObject jumpParticles;
+    public PlayerPlatformStop PlayerPlatformStop;
 
+    //variables voor het bewegen en springen
     private Rigidbody rb;
     private float moveSpeedForward = 0;
     private float moveSpeedSide = 0;
@@ -29,9 +29,8 @@ public class EigenInput : MonoBehaviour
     private int jumpTimes = 0;
     private Vector3 movement;
     private bool jumpBool; 
-    public GameObject jumpParticles;
-    public PlayerPlatformStop PlayerPlatformStop;
 
+    //variables voor de camera
     private float mouseY;
     private float mouseX;
     private float zoom = -3;
@@ -40,19 +39,20 @@ public class EigenInput : MonoBehaviour
     private float zoomMax = -10f;
     private float camYOffset = 1;
 
+    //variables voor het dashen
     private int dashTimes = 0;
     private bool dashPossible;
     private bool dashBool;
 
     //TODO
     //separate scripts...
-    //comments
     //bug dash niet altijd werkend (vooral vanaf platform, ground werkt wel)
 
    
 
     void Start()
     {
+        //voor het aanspreken van de speler en de collider voor de grounded raycast
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<CapsuleCollider>();
     }
@@ -60,18 +60,12 @@ public class EigenInput : MonoBehaviour
     void Update()
     {
 
-        //Debug.Log(dashTimes);
-
         //Voor het zoomen van de muis (met clamp)
         zoom += Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         zoom = Mathf.Clamp(zoom, zoomMax, zoomMin);
-
-        //if (zoom > zoomMin)
-        //    zoom = zoomMin;
-        //if (zoom < zoomMax)
-        //    zoom = zoomMax;
         playerCam.transform.localPosition = new Vector3(0, 0, zoom);
 
+        //beweegt de muis als de rechtermuisknop is ingedrukt en verbergt dat de muis
         if (Input.GetMouseButton(1))
         {
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
@@ -97,6 +91,7 @@ public class EigenInput : MonoBehaviour
             Instantiate(jumpParticles, character);
         }
         
+        //als shift ingedrukt word en de voorwaardes goed zijn word er een dash boolean aangezet
         if (Input.GetButtonDown("Fire3") && dashPossible && dashTimes <= dashMax -1)
         {
             dashBool = true;
@@ -115,15 +110,13 @@ public class EigenInput : MonoBehaviour
             jumpTimes = 0;
             dashPossible = false;
             dashTimes = 0;
-            //Debug.Log("grounded");
         }
         else
         {
             dashPossible = true;
-            //Debug.Log("air");
         }
 
-        //zorgt dat de character vooruit loopt.
+        //zorgt dat de character vooruit en achteruit beweegt
         if (Input.GetKey(KeyCode.W) && !PlayerPlatformStop.platformCollision)
         {
             moveSpeedForward = moveMulti;
@@ -137,7 +130,7 @@ public class EigenInput : MonoBehaviour
             moveSpeedForward = 0;
         }
 
-        //zorgt dat de character vooruit loopt.
+        //zorgt dat de character zijwaards beweegt
         if (Input.GetKey(KeyCode.A))
         {
             moveSpeedSide = -moveMulti;
@@ -151,6 +144,7 @@ public class EigenInput : MonoBehaviour
             moveSpeedSide = 0;
         }
         
+        //laat de character dashen
         if (dashBool)
         {
             rb.MovePosition((character.forward * dashDistance) + rb.position);
@@ -158,18 +152,21 @@ public class EigenInput : MonoBehaviour
             dashBool = false;
         }
 
+        //draait de character aan de hand van de camera
         character.rotation = Quaternion.Euler(0, viewPoint.eulerAngles.y, 0);
 
+        //zorgt dat de character vooruit, achteruit en zijwaards beweegt aan de hand van de input
         movement = (character.forward * moveSpeedForward) + (character.right * moveSpeedSide);
+        rb.MovePosition(movement + rb.position);
 
-            rb.MovePosition(movement + rb.position);
-
+        //laat de character springen.
         if (jumpBool)
         {
             rb.velocity = Vector3.up * jumpSpeed;
             jumpBool = false;
         }
 
+        //zorgt dat de character sneller valt (voor betere spring ervaring)
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (gravMulti - 1) * Time.deltaTime;
