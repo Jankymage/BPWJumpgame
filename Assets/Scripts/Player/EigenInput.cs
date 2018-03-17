@@ -19,6 +19,8 @@ public class EigenInput : MonoBehaviour
     [Range(0f, 20f)]
     public float gravMulti;
     public GameObject jumpParticles;
+    public GameObject jumpSound;
+    public GameObject blinkSound;
     public PlayerPlatformStop PlayerPlatformStop;
 
     //variables voor het bewegen en springen
@@ -89,6 +91,7 @@ public class EigenInput : MonoBehaviour
             jumpBool = true;
             jumpTimes += 1;
             Instantiate(jumpParticles, character);
+            Instantiate(jumpSound, character);
         }
         
         //als shift ingedrukt word en de voorwaardes goed zijn word er een dash boolean aangezet
@@ -96,6 +99,7 @@ public class EigenInput : MonoBehaviour
         {
             dashBool = true;
             dashTimes += 1;
+            Instantiate(blinkSound, character);
         }
 
     }
