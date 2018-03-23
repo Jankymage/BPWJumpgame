@@ -32,8 +32,8 @@ public class OnTriggerPlayer : MonoBehaviour {
         {
             other.gameObject.SetActive(false);
             CollectLeft -= 1;
-            playerLight.intensity +=1;
-            playerLight.range +=1;
+            playerLight.intensity +=0.5f;
+            playerLight.range +=0.1f;
             Instantiate(crystalSound, character);
 
             if (CollectLeft <= 0)
