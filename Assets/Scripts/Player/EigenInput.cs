@@ -47,7 +47,6 @@ public class EigenInput : MonoBehaviour
     private bool dashBool;
 
     //TODO
-    //separate scripts...
     //bug dash niet altijd werkend (vooral vanaf platform, ground werkt wel)
 
    
