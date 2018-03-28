@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class TutorialMove : MonoBehaviour {
 
+    //laat de text zien voor de movement tutorial.
+
     public Text move;
-
-
 
     private void OnTriggerEnter(Collider other)
     {

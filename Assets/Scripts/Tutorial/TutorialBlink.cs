@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class TutorialBlink : MonoBehaviour {
 
+    //laat de text zien voor de blink tutorial.
 
     public Text Blink;
-
-
 
     private void OnTriggerEnter(Collider other)
     {

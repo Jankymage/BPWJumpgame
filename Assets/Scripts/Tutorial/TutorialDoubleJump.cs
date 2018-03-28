@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class TutorialDoubleJump : MonoBehaviour {
 
+    //laat de text zien voor de doublejump tutorial.
 
     public Text doubleJump;
-
-
 
     private void OnTriggerEnter(Collider other)
     {

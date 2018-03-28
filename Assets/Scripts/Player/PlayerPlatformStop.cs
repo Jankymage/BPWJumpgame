@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPlatformStop : MonoBehaviour {
 
     //script zorgt er voor dat de player niet tegen een platform aan blijft plakken.
+    //platformCollision word doorgegeven naar eigeninput
 
 	public EigenInput EigenInput;
     public bool platformCollision = false; //voor movement in EigenInput

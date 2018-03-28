@@ -30,12 +30,4 @@ public class PlayerPlatformMount : MonoBehaviour {
         }
     }
 
-    // void OnCollisionEnter(Collision coll)
-    // {
-    //     if (coll.gameObject.tag == "Platform")
-    //     {
-    //         m_currMovingPlatform = coll.gameObject.transform;
-    //         transform.SetParent(m_currMovingPlatform);
-    //     }
-    // }
 }

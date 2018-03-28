@@ -107,7 +107,7 @@ public class EigenInput : MonoBehaviour
     void FixedUpdate()
     {
 
-        //reset de int voor het aantal sprongen, als de character op de grond is.
+        //Checkt of de character grond onder zich heeft en reset de couters voor de dash en jump
         if (Grounded())
         {
             jumpTimes = 0;

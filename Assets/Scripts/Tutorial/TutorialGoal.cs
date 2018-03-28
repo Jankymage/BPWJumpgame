@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class TutorialGoal : MonoBehaviour {
 
+    //laat de text zien voor het doel tutorial.
+
     public Text goal;
-
-
 
     private void OnTriggerEnter(Collider other)
     {
