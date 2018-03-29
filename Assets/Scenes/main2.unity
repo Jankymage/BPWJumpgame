@@ -1933,7 +1933,8 @@ Prefab:
       propertyPath: m_Name
       value: Platform02DoublejumpTut
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 47681309c64cd504eba7e537ef9e209e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1356492900
@@ -2172,7 +2173,8 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1ce198f8590ea274c80a7f3487285232, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 47681309c64cd504eba7e537ef9e209e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1534931800 stripped
@@ -2896,7 +2898,8 @@ Prefab:
       propertyPath: m_Name
       value: Platform06
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 47681309c64cd504eba7e537ef9e209e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2041398131 stripped

@@ -153,6 +153,7 @@ public class EigenInput : MonoBehaviour
             rb.MovePosition((character.forward * dashDistance) + rb.position);
 
             dashBool = false;
+            return;
         }
 
         //draait de character aan de hand van de camera
@@ -167,6 +168,7 @@ public class EigenInput : MonoBehaviour
         {
             rb.velocity = Vector3.up * jumpSpeed;
             jumpBool = false;
+            return;
         }
 
         //zorgt dat de character sneller valt (voor betere spring ervaring)
